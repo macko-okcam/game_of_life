@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import img from './thumbs_up.png';
 
 class App extends Component {
   constructor() {
@@ -14,7 +15,10 @@ class App extends Component {
 
   render() {
     return (
-      <h1>This is where stuff will happen</h1>
+      <>
+        <h1>This is where stuff will happen</h1>
+        <img src={img} />
+      </>
     );
   }
 }
