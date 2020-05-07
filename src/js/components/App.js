@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+
+import Button from 'react-bootstrap/Button';
+
 import img from './thumbs_up.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../scss/main.scss';
+import GameBoard from "./GameBoard";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      value: ""
+      
     };
 
   }
@@ -15,7 +21,10 @@ class App extends Component {
 
   render() {
     return (
+
       <>
+
+        <GameBoard></GameBoard>
         <h1>This is where stuff will happen</h1>
         <img src={img} />
       </>
