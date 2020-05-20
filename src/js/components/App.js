@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+import { Provider } from "react-redux";
+import store from "../store/index";
+
 import Button from 'react-bootstrap/Button';
 
 import img from './thumbs_up.png';
@@ -25,7 +28,7 @@ class App extends Component {
       <>
 
         <GameBoard></GameBoard>
-        <h1>This is where stuff will happen</h1>
+        <h1>This is where stuff will happen. Fun!</h1>
         <img src={img} />
       </>
     );
@@ -35,4 +38,7 @@ class App extends Component {
 export default App;
 
 const wrapper = document.getElementById("container");
-wrapper ? ReactDOM.render(<App />, wrapper) : false;
+wrapper ? ReactDOM.render(
+                            <Provider store={store}>
+                              <App />
+                            </Provider>, wrapper) : false;
