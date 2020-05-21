@@ -6,14 +6,52 @@ const initialState = {
     cellBoardArray: []
   };
   
-  function getNextCycleArray(currentCycleArray){
 
+  function getLiveNeighborTotal(i, state){
+    
+    var currentCycleArray = state.cellBoardArray
+
+    var cols = state.columns
+    var upperNeighbor = i - cols
+    var lowerNeighbor = i + cols
+
+    var shortcutValArray = [
+                                upperNeighbor-1, upperNeighbor, upperNeighbor+1,
+                                i-1, i+1,
+                                lowerNeighbor-1, lowerNeighbor, lowerNeighbor+1
+                           ]
+
+    var liveTotal = 0
+
+    shortcutValArray.forEach(indexVal => {
+
+        if(currentCycleArray[indexVal] != null){
+            liveTotal =  currentCycleArray[indexVal] ? liveTotal + 1 : liveTotal
+        }
+        
+    });
+
+    return liveTotal;
+
+  }
+
+  function getNextCycleArray(state){
+
+    var currentCycleArray = state.cellBoardArray
     var nextCycleArray = new Array(currentCycleArray.length).fill(false)
     
     currentCycleArray.forEach(function (value, i) {
-        if(value){
-            console.log("hurray!!!" + element);  
+        
+        var liveNeighbors = getLiveNeighborTotal(i , state)
+
+        if(value == true && (liveNeighbors == 2 || liveNeighbors == 3)){
+            nextCycleArray[i] = true
+        }else if(value == false && (liveNeighbors == 3)){
+            nextCycleArray[i] = true
+        }else{
+            nextCycleArray[i] = false
         }
+
     });
 
     return nextCycleArray
@@ -95,7 +133,7 @@ const initialState = {
 
                 }else if ( action.payload.updateType == "next" ){
 
-                    newBoardArray =  getNextCycleArray(state.cellBoardArray);
+                    newBoardArray =  getNextCycleArray(state);
 
                     return {
                         ...state,
