@@ -1,4 +1,4 @@
-import { CLICK_CELL, REBUILD_GAMEBOARD } from "../constants/action-types";
+import { CLICK_CELL, REBUILD_GAMEBOARD, UPDATE_DIMENSIONS } from "../constants/action-types";
 
 const initialState = {
     columns: 10,
@@ -27,9 +27,18 @@ const initialState = {
         case REBUILD_GAMEBOARD:
                 return {
                     ...state,
+                    rows : parseInt(action.payload.rows),
+                    columns: parseInt(action.payload.columns),
                     cellBoardArray: new Array(action.payload.columns * action.payload.rows).fill(false)
                 }
             break;
+        case UPDATE_DIMENSIONS:
+                return {
+                    ...state,
+                    rows : parseInt(action.payload.rows),
+                    columns: parseInt(action.payload.columns)
+                }
+            break;            
         default:
             break;
     }

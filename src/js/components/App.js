@@ -10,6 +10,7 @@ import img from './thumbs_up.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../scss/main.scss';
 import GameBoard from "./GameBoard";
+import GameSettings from "./GameSettings";
 
 class App extends Component {
   constructor() {
@@ -28,6 +29,7 @@ class App extends Component {
       <>
 
         <GameBoard></GameBoard>
+        <GameSettings></GameSettings>
         <h1>This is where stuff will happen. Fun!</h1>
         <img src={img} />
       </>

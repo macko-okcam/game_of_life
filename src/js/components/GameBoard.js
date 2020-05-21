@@ -6,7 +6,7 @@ import { rebuildGameBoard } from "../actions";
 const mapStateToProps = state => {
   return { 
             columns: state.columns,
-            rows: state.rows
+            rows: state.rows,
           };
 };
 
@@ -20,11 +20,7 @@ class ConnectedGameBoard extends Component {
   constructor(props) {
     super(props);
 
-    this.props.rebuildGameBoard({columns:this.props.columns, rows:this.props.rows})
-    console.log(this.props);
-    console.log(this.props.columns);
-    console.log(this.props.rows);
-    
+    this.props.rebuildGameBoard({columns:this.props.columns, rows:this.props.rows}) 
 
   }
 
@@ -35,7 +31,10 @@ class ConnectedGameBoard extends Component {
   }
 
   renderRow(min, max) {
-    console.log("redering id " + min + " to " + max);
+
+    
+    
+    
     var rowArray = []
 
     for (let index = min; index < max; index++) {
@@ -56,7 +55,7 @@ class ConnectedGameBoard extends Component {
       
       let min = index * columns;
       let max = min + columns - 1;
-
+      console.log("rendering " + min + " to " + max);
       boardArray.push(this.renderRow(min, max))
       
     }
