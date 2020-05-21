@@ -20,11 +20,16 @@ class ConnectedGameControls extends Component {
   constructor(props) {
     super(props);
 
+    this.clickInvert = this.clickInvert.bind(this)
     this.clickNextCycle = this.clickNextCycle.bind(this)
   }
 
+  clickInvert(event) {
+    this.props.updateNextCycle({updateType:"invert"})
+  }
+
   clickNextCycle(event) {
-    this.props.updateNextCycle({})
+    this.props.updateNextCycle({updateType:"next"})
   }
 
 
@@ -34,7 +39,9 @@ class ConnectedGameControls extends Component {
    return (
       <div className="game-controls">
  
-        <button type="button" value="next_step" onClick={this.clickNextCycle}>NEXT CYCLE</button>
+        <button type="button" value="invert" onClick={this.clickInvert}>INVERT</button>
+        <button type="button" value="next_cycle" onClick={this.clickNextCycle} disabled >NEXT CYCLE</button>
+        <button type="button" value="auto_cycle" onClick={this.clickAutoCycle} disabled >AUTO CYCLE</button>
 
       </div>
     );

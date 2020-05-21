@@ -6,6 +6,30 @@ const initialState = {
     cellBoardArray: []
   };
   
+  function getNextCycleArray(currentCycleArray){
+
+    var nextCycleArray = new Array(currentCycleArray.length).fill(false)
+    
+    currentCycleArray.forEach(function (value, i) {
+        if(value){
+            console.log("hurray!!!" + element);  
+        }
+    });
+
+    return nextCycleArray
+  }
+  
+  function getInvertedCycleArray(currentCycleArray){
+
+    var nextCycleArray = new Array(currentCycleArray.length).fill(false)
+    
+    currentCycleArray.forEach(function (value, i) {
+        nextCycleArray[i] = !value
+    });
+
+    return nextCycleArray
+  }
+
   function rootReducer(state = initialState, action) {
 
     switch (action.type) {
@@ -40,7 +64,28 @@ const initialState = {
                 }
             break;
         case UPDATE_NEXTCYCLE:
-                console.log("calculating next life cycle!!!");
+
+                var newBoardArray = []
+
+                if (action.payload.updateType == "invert") {
+
+                    newBoardArray =  getInvertedCycleArray(state.cellBoardArray);
+
+                    return {
+                        ...state,
+                        cellBoardArray: newBoardArray
+                    }
+
+                }else if ( action.payload.updateType == "next" ){
+
+                    newBoardArray =  getNextCycleArray(state.cellBoardArray);
+
+                    return {
+                        ...state,
+                        cellBoardArray: newBoardArray
+                    }
+
+                }                
                 
             break;
         default:
