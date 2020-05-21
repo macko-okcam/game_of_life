@@ -31,6 +31,8 @@ class ConnectedGameSettings extends Component {
 
   render() {
 
+  var rows = this.props.rows
+  var columns = this.props.columns
     
    return (
       <div className="game-settings">
@@ -41,6 +43,7 @@ class ConnectedGameSettings extends Component {
           <input
             type="number"
             id="rows" min="1" max="50"
+            defaultValue = {rows}
           />
         {/* </div>
         <div> */}
@@ -48,6 +51,7 @@ class ConnectedGameSettings extends Component {
           <input
             type="number" min="1" max="50"
             id="columns"
+            defaultValue = {columns}
           />
         <button type="submit">UPDATE</button>
         </div>
