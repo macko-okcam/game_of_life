@@ -27,7 +27,7 @@ class ConnectedGameBoard extends Component {
   renderSquare(i) {
     
     
-    return <Cell id={i}></Cell>;
+    return <Cell id={i} key={"cell" + i}></Cell>;
   }
 
   renderRow(min, max) {
@@ -37,12 +37,12 @@ class ConnectedGameBoard extends Component {
     
     var rowArray = []
 
-    for (let index = min; index < max; index++) {
+    for (let index = min; index <= max; index++) {
       rowArray.push(this.renderSquare(index))   
     }
 
     return (
-      <div className="board-row">
+      <div className="board-row" key={"row" + min + "to" + max}>
         {rowArray}
       </div>
     )
@@ -55,7 +55,7 @@ class ConnectedGameBoard extends Component {
       
       let min = index * columns;
       let max = min + columns - 1;
-      console.log("rendering " + min + " to " + max);
+      // console.log("rendering " + min + " to " + max);
       boardArray.push(this.renderRow(min, max))
       
     }
