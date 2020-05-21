@@ -19,6 +19,14 @@ const initialState = {
     return nextCycleArray
   }
   
+  function getClearCycleArray(currentCycleArray){
+
+    var nextCycleArray = new Array(currentCycleArray.length).fill(false)
+    
+    return nextCycleArray
+
+  }
+
   function getInvertedCycleArray(currentCycleArray){
 
     var nextCycleArray = new Array(currentCycleArray.length).fill(false)
@@ -70,6 +78,15 @@ const initialState = {
                 if (action.payload.updateType == "invert") {
 
                     newBoardArray =  getInvertedCycleArray(state.cellBoardArray);
+
+                    return {
+                        ...state,
+                        cellBoardArray: newBoardArray
+                    }
+
+                }else if (action.payload.updateType == "clear") {
+
+                    newBoardArray =  getClearCycleArray(state.cellBoardArray);
 
                     return {
                         ...state,
