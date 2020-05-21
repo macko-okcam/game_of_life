@@ -1,8 +1,8 @@
-import { CLICK_CELL, REBUILD_GAMEBOARD, UPDATE_DIMENSIONS } from "../constants/action-types";
+import { CLICK_CELL, REBUILD_GAMEBOARD, UPDATE_DIMENSIONS, UPDATE_NEXTCYCLE } from "../constants/action-types";
 
 const initialState = {
     columns: 10,
-    rows :15,
+    rows :10,
     cellBoardArray: []
   };
   
@@ -38,7 +38,11 @@ const initialState = {
                     rows : parseInt(action.payload.rows),
                     columns: parseInt(action.payload.columns)
                 }
-            break;            
+            break;
+        case UPDATE_NEXTCYCLE:
+                console.log("calculating next life cycle!!!");
+                
+            break;
         default:
             break;
     }
