@@ -1,7 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Cell from "./Cell";
 
-class GameBoard extends Component {
+const mapStateToProps = state => {
+  return { 
+            columns: state.columns,
+            rows: state.rows
+          };
+};
+
+class ConnectedGameBoard extends Component {
   constructor() {
     super();
 
@@ -53,18 +61,17 @@ class GameBoard extends Component {
 
   render() {
 
-    var col = 10;
-    var row = 10;
-
    return (
       <div className="game-board">
  
-        {this.renderBoard(row, col)}
+        {this.renderBoard(this.props.rows, this.props.columns)}
 
       </div>
     );
   }
 
 }
+
+const GameBoard = connect(mapStateToProps)(ConnectedGameBoard);
 
 export default GameBoard;
