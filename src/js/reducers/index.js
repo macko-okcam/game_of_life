@@ -1,39 +1,39 @@
-import { CLICK_CELL } from "../constants/action-types";
+import { CLICK_CELL, REBUILD_GAMEBOARD } from "../constants/action-types";
 
 const initialState = {
     columns: 10,
-    rows :10,
-    cellBoardArray: new Array(100).fill(false)
+    rows :15,
+    cellBoardArray: []
   };
   
   function rootReducer(state = initialState, action) {
 
-
-    if (action.type === CLICK_CELL) {
-
-        // console.log(action.payload);
+    switch (action.type) {
+        case CLICK_CELL:
+                var index = action.payload.index;
+                var isAlive = action.payload.isAlive;
         
-        var index = action.payload.index;
-        var isAlive = action.payload.isAlive;
-        // console.log("this cell was clicked " + index );        
+                var newBoardArray = [
+                    ...state.cellBoardArray.slice(0, index),
+                    isAlive,
+                    ...state.cellBoardArray.slice(index + 1)
+                ];
+                
+                return {
+                    ...state,
+                    cellBoardArray: newBoardArray
+                }
+            break;
+        case REBUILD_GAMEBOARD:
+                return {
+                    ...state,
+                    cellBoardArray: new Array(action.payload.columns * action.payload.rows).fill(false)
+                }
+            break;
+        default:
+            break;
+    }
 
-        var newBoardArray = [
-            ...state.cellBoardArray.slice(0, index),
-            isAlive,
-            ...state.cellBoardArray.slice(index + 1)
-        ];
-
-        // console.log(newBoardArray);
-        
-        return {
-            ...state,
-            cellBoardArray: newBoardArray
-        }
-        
-        // return Object.assign({}, state, {
-        //     cellBoard: newBoardArray
-        //   });
-      }
       return state;
   };
   

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Cell from "./Cell";
+import { rebuildGameBoard } from "../actions";
 
 const mapStateToProps = state => {
   return { 
@@ -9,22 +10,32 @@ const mapStateToProps = state => {
           };
 };
 
-class ConnectedGameBoard extends Component {
-  constructor() {
-    super();
+function mapDispatchToProps(dispatch) {
+  return {
+    rebuildGameBoard: boardDimensions => dispatch(rebuildGameBoard(boardDimensions))
+  };
+}
 
-    this.state = {
-      
-    };
+class ConnectedGameBoard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.props.rebuildGameBoard({columns:this.props.columns, rows:this.props.rows})
+    console.log(this.props);
+    console.log(this.props.columns);
+    console.log(this.props.rows);
+    
 
   }
 
   renderSquare(i) {
+    
+    
     return <Cell id={i}></Cell>;
   }
 
   renderRow(min, max) {
-
+    console.log("redering id " + min + " to " + max);
     var rowArray = []
 
     for (let index = min; index < max; index++) {
@@ -43,8 +54,8 @@ class ConnectedGameBoard extends Component {
     var boardArray = []
     for (let index = 0; index < rows; index++) {
       
-      let min = index * rows;
-      let max = min + columns;
+      let min = index * columns;
+      let max = min + columns - 1;
 
       boardArray.push(this.renderRow(min, max))
       
@@ -72,6 +83,6 @@ class ConnectedGameBoard extends Component {
 
 }
 
-const GameBoard = connect(mapStateToProps)(ConnectedGameBoard);
+const GameBoard = connect(mapStateToProps, mapDispatchToProps)(ConnectedGameBoard);
 
 export default GameBoard;

@@ -1,1 +1,2 @@
 export const CLICK_CELL = "CLICK_CELL";
+export const REBUILD_GAMEBOARD = "REBUILD_GAMEBOARD";
