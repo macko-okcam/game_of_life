@@ -21,24 +21,12 @@ class ConnectedGameSettings extends Component {
   constructor(props) {
     super(props);
 
-    // this.props.rebuildGameBoard({columns:this.props.columns, rows:this.props.rows})
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.id]: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-
-    // console.log(event.target.rows.value);
-    
-
-    // this.props.updateDimensions({columns:event.target.columns.value, rows:event.target.rows.value})
     this.props.rebuildGameBoard({columns:event.target.columns.value, rows:event.target.rows.value})
-
   }
 
   render() {
@@ -53,8 +41,6 @@ class ConnectedGameSettings extends Component {
           <input
             type="number"
             id="rows" min="1" max="50"
-            // value="15"
-            // onChange={this.handleChange}
           />
         {/* </div>
         <div> */}
@@ -62,8 +48,6 @@ class ConnectedGameSettings extends Component {
           <input
             type="number" min="1" max="50"
             id="columns"
-            // value="20"
-            // onChange={this.handleChange}
           />
         <button type="submit">UPDATE</button>
         </div>
