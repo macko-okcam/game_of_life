@@ -6,29 +6,61 @@ const initialState = {
     cellBoardArray: []
   };
   
+  function getShortcutValues(i, state){
+        var valueArray = []
+
+        var cols = state.columns
+        var rows = state.rows
+        var upperNeighbor = i - cols
+        var lowerNeighbor = i + cols
+
+        if( i >= cols) { //has upper neighbors
+            if (i % cols != 0){
+                valueArray.push (upperNeighbor-1)
+            }
+
+            valueArray.push(upperNeighbor)
+
+            if (i % cols != cols-1){
+                valueArray.push (upperNeighbor+1)
+            }
+        }
+
+        if (i % cols != 0){ //has left neighbor
+            valueArray.push (i-1)
+        }
+
+        if (i % cols != cols-1){ //has right neighbor
+            valueArray.push (i+1)
+        }
+
+        if(parseInt(i/rows) < (rows-1)){ //has lower neighbor
+            if (i % cols != 0){
+                valueArray.push (lowerNeighbor-1)
+            }
+
+            valueArray.push(lowerNeighbor)
+
+            if (i % cols != cols-1){
+                valueArray.push (lowerNeighbor+1)
+            }
+        }
+
+        return valueArray
+  }
 
   function getLiveNeighborTotal(i, state){
     
     var currentCycleArray = state.cellBoardArray
 
-    var cols = state.columns
-    var upperNeighbor = i - cols
-    var lowerNeighbor = i + cols
-
-    var shortcutValArray = [
-                                upperNeighbor-1, upperNeighbor, upperNeighbor+1,
-                                i-1, i+1,
-                                lowerNeighbor-1, lowerNeighbor, lowerNeighbor+1
-                           ]
+    var shortcutValArray = getShortcutValues(i, state)
 
     var liveTotal = 0
 
     shortcutValArray.forEach(indexVal => {
 
-        if(currentCycleArray[indexVal] != null){
-            liveTotal =  currentCycleArray[indexVal] ? liveTotal + 1 : liveTotal
-        }
-        
+        liveTotal =  currentCycleArray[indexVal] ? liveTotal + 1 : liveTotal
+
     });
 
     return liveTotal;
